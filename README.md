@@ -1,2 +1,3 @@
 # FE-training-examples
-前端培训用例
+Repo's Name: 前端培训用例
+author: woota
