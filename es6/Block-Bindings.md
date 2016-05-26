@@ -38,3 +38,20 @@ for(var i=0; i<data.length; i++) {
 }
 ```
 
+### const关键字
+```javascript
+function getValue(condition) {
+
+    if (condition) {
+        console.log(value)
+        let value = "blue";
+
+        console.log(value)
+    } else {
+        console.log(value)
+    }
+
+    console.log(value)
+}
+```
+
