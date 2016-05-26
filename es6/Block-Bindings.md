@@ -40,6 +40,7 @@ for(var i=0; i<data.length; i++) {
 
 ### const关键字
 ```javascript
+/* 试图访问为定义的变量会抛出异常 */
 function getValue(condition) {
 
     if (condition) {
