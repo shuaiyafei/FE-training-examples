@@ -1,4 +1,4 @@
-### 一、var 有什么问题？
+### var 有什么问题？
 1.作用域提升：
 ```javascript
 function someFunction(condition) {
