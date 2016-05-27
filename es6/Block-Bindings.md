@@ -38,9 +38,9 @@ for(var i=0; i<data.length; i++) {
 }
 ```
 
-### let关键字
+### let 关键字
 ```javascript
-/* 试图访问未定义的变量会抛出异常 */
+/* 试图访问未定义的变量会抛出异常: ReferenceError */
 function getValue(condition) {
 
     if (condition) {
@@ -56,7 +56,7 @@ function getValue(condition) {
 }
 ```
 
-### 不能重复生命变量
+### 不能重复声明变量
 ```javascript
 var a = 123
 let a = 234 // 报错
@@ -68,7 +68,29 @@ if(condition) {
 }
 ```
 
-### const关键字
+### const 关键字
+```javascript
+const name = 'woota' 
+name = 'lijun' // 报错，const关键字声明的变量不能更改它的值
+
+const anotherName // 报错，const关键字声明的变量必须在声明的时候给定初始化值
+
+const obj = { name: 'woota' }
+obj.name = 'lijun' // 这条语句是否合法？
+obj = { name: 'lijun' } // 这个呢？
+```
+
+### const 在for与for in / for of中的区别
+```javascript
+for(const i=0; i<9; i++) {
+  console.log(i)
+}
+
+for(const item of [1,2,3]) {
+  console.log(item)
+}
+```
+
 
 
 
