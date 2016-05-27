@@ -80,7 +80,7 @@ obj.name = 'lijun' // 这条语句是否合法？
 obj = { name: 'lijun' } // 这个呢？
 ```
 
-### const 在for与for in / for of中的区别
+### const 在 for 与 for in / for of 中的区别
 ```javascript
 for(const i=0; i<9; i++) {
   console.log(i)
@@ -91,6 +91,23 @@ for(const item of [1,2,3]) {
 }
 ```
 
+### 全局环境中的 var, let, const
+```javascript
+var console = null
+window.console.log(123) // 报错，console 是 null
+window.console === console // true
 
+let alert = function(msg) {
+  return msg
+}
+alert('hey') // 输出 'hey'
+window.alert === alert // false
+```
+
+### 总结
+
+1. 尽量使用 const，let 代替 var 进行变量声明；
+2. 如果必要，还是可以使用 var。；
+3. 一般来说，先考虑使用 const，只有在确定某个变量的值需要变更的情况下才用 let;
 
 
