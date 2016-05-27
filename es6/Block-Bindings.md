@@ -38,14 +38,14 @@ for(var i=0; i<data.length; i++) {
 }
 ```
 
-### const关键字
+### let关键字
 ```javascript
-/* 试图访问为定义的变量会抛出异常 */
+/* 试图访问未定义的变量会抛出异常 */
 function getValue(condition) {
 
     if (condition) {
         console.log(value)
-        let value = "blue";
+        let value = "blue"
 
         console.log(value)
     } else {
@@ -55,4 +55,20 @@ function getValue(condition) {
     console.log(value)
 }
 ```
+
+### 不能重复生命变量
+```javascript
+var a = 123
+let a = 234 // 报错
+```
+```javascript
+var a = 123
+if(condition) {
+  let a = 234 // 正常运行，在if条件语句的作用域中，我们创建了一个新变量也叫作a，它会在当前作用域中覆盖全局作用域中的a
+}
+```
+
+### const关键字
+
+
 
