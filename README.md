@@ -2,7 +2,7 @@
 
 Repo's Name: 前端培训用例
 
-author: woota
+author: [woota](https://github.com/woota)
 
 
 ## 延伸阅读
