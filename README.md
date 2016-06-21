@@ -12,3 +12,9 @@ author: [woota](https://github.com/woota)
 [React 中文文档](http://reactjs.cn/react/docs/getting-started.html)
 
 [Redux 中文文档](http://cn.redux.js.org/)
+
+[玩转 npm](http://www.alloyteam.com/2016/03/master-npm/)
+
+[淘宝 cnpm](https://npm.taobao.org/)
+
+[ant.design](http://ant.design/)
