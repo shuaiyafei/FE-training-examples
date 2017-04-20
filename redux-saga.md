@@ -80,10 +80,10 @@ sagaMiddleware.run(mySaga)
 // render the application
 ```
 
-
-## 阻塞调用与非阻塞调用
-* **Blocking calls:** `call`, `take`
-* **Non-blocking calls:** `put`, `fork`, `cancel`
+# 名词解释
+## Blocking calls / Non-blocking calls
+* **阻塞调用:** `call`, `take`
+* **非阻塞调用:** `put`, `fork`, `cancel`
 
 ```js
 function* saga() {
@@ -96,6 +96,8 @@ function* saga() {
   yield cancel(task)                           // Non-blocking: will resume immediately
 }
 ```
+
+
 ## Effect
 An effect is a plain JavaScript Object containing some instructions to be executed by the saga middleware.
 ```js
@@ -116,4 +118,17 @@ function* fetchProducts() {
   }
 }
 ```
+
+
+## Task
+An task is a saga running in background. It can be created by using the `fork` function.
+```js
+function* saga() {
+  ...
+  const task = yield fork(otherSaga, ...args)
+  ...
+}
+```
+
+
 
