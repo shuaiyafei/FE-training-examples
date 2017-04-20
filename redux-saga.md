@@ -257,14 +257,31 @@ export default function* updateResource() {
 ```
 
 # 测试大于一切
+## redux-thunk
+```js
+// action creators
+const requestProducts = () => ({type: 'PRODUCTS_REQUESTED'})
+const receivedProducts = (products) => ({type: 'PRODUCTS_RECEIVED', products})
+const fetchProducts = () => {
+  return (dispatch) => {
+    dispatch(requestProducts())
+    Api.fetch('/products').then((products) => {
+      dispatch(receivedProducts(products))
+    })
+  }
+}
+```
+
+
+## redux-saga
 **saga.js**
 ```js
 import { call, put } from 'redux-saga/effects'
 // ...
 
 function* fetchProducts() {
+  yield put({ type: 'PRODUCTS_REQUESTED'})
   const products = yield call(Api.fetch, '/products')
-  // create and yield a dispatch Effect
   yield put({ type: 'PRODUCTS_RECEIVED', products })
 }
 ```
@@ -274,6 +291,14 @@ import { call, put } from 'redux-saga/effects'
 import Api from '...'
 
 const iterator = fetchProducts()
+
+
+// expects a dispatch instruction
+assert.deepEqual(
+  iterator.next().value,
+  put({ type: 'PRODUCTS_REQUESTED'}),
+  "fetchProducts should yield an Effect put({ type: 'PRODUCTS_REQUESTED'})"
+)
 
 // expects a call instruction
 assert.deepEqual(
