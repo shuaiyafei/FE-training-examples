@@ -188,6 +188,74 @@ function* takeLatest(pattern, saga, ...args) {
 }
 ```
 
+## Throttling
+```js
+import { throttle } from 'redux-saga'
+
+function* handleInput(input) {
+  // ...
+}
+
+function* watchInput() {
+  yield throttle(500, 'INPUT_CHANGED', handleInput)
+}
+```
+
+## Debouncing
+```js
+
+import { delay } from 'redux-saga'
+
+function* handleInput({ input }) {
+  // debounce by 500ms
+  yield call(delay, 500)
+  ...
+}
+
+function* watchInput() {
+  // will cancel current running handleInput task
+  yield takeLatest('INPUT_CHANGED', handleInput);
+}
+```
+
+## Retrying XHR calls
+```js
+import { delay } from 'redux-saga'
+
+function* updateApi(data) {
+  for(let i = 0; i < 5; i++) {
+    try {
+      const apiResponse = yield call(apiRequest, { data });
+      return apiResponse;
+    } catch(err) {
+      if(i < 5) {
+        yield call(delay, 2000);
+      }
+    }
+  }
+  // attempts failed after 5x2secs
+  throw new Error('API request failed');
+}
+
+export default function* updateResource() {
+  while (true) {
+    const { data } = yield take('UPDATE_START');
+    try {
+      const apiResponse = yield call(updateApi, data);
+      yield put({
+        type: 'UPDATE_SUCCESS',
+        payload: apiResponse.body,
+      });
+    } catch (error) {
+      yield put({
+        type: 'UPDATE_ERROR',
+        error
+      });
+    }
+  }
+}
+```
+
 
 
 
