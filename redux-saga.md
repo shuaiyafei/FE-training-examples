@@ -8,7 +8,7 @@
 
 
 ## 什么是 `saga`?
-一句话回答：`saga` 大致上可以等同于 `process manage`，中文意思是流程管理。
+一句话回答：`saga` 大致上可以等同于 `process manage`，中文意思是流程管理。它在 `redux-saga` 中是通过 **Generator** 来实现的。通常我们说一个 `saga` 指的就是一个 **generator** 函数。
 
 
 ## 初识 `redux-saga`
@@ -121,7 +121,7 @@ function* fetchProducts() {
 
 
 ## Task
-A task is a saga running in background. It can be created by using the `fork` function.
+A task is like a process running in background. It can be created by using the `fork` function. (Iterator created by calling a saga function) 
 ```js
 function* saga() {
   ...
