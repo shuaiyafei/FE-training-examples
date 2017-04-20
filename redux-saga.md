@@ -96,4 +96,24 @@ function* saga() {
   yield cancel(task)                           // Non-blocking: will resume immediately
 }
 ```
+## Effect
+An effect is a plain JavaScript Object containing some instructions to be executed by the saga middleware.
+```js
+import { call } from 'redux-saga/effects'
+
+function* fetchProducts() {
+  const products = yield call(Api.fetch, '/products')
+  // ...
+}
+```
+
+```
+// Effect -> call the function Api.fetch with `./products` as argument
+{
+  CALL: {
+    fn: Api.fetch,
+    args: ['./products']
+  }
+}
+```
 
