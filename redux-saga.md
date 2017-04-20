@@ -274,6 +274,7 @@ const fetchProducts = () => {
 ```
 
 **测试 `fetchProducts` 返回的是一个函数，`dispatch` 是什么鬼？我还得创建一个 `redux` 环境，或是 mock 一个 `dispatch`？Mock `Api.fetch`？**
+
 <img src='http://www.gaoxiaogif.com/d/file/20160314/ece4987f0df91c03addc3c6fb88a57eb.jpg' alt='这tm就尴尬了'>
 
 
