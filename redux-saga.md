@@ -79,3 +79,21 @@ sagaMiddleware.run(mySaga)
 
 // render the application
 ```
+
+
+## 阻塞调用与非阻塞调用
+* **Blocking calls:** `call`, `take`
+* **Non-blocking calls:** `put`, `fork`, `cancel`
+
+```js
+function* saga() {
+  yield take(ACTION)              // Blocking: will wait for the action
+  yield call(ApiFn, ...args)      // Blocking: will wait for ApiFn (If ApiFn returns a Promise)
+
+  yield put(...)                   // Non-Blocking: will dispatch within internal scheduler
+
+  const task = yield fork(otherSaga, ...args)  // Non-blocking: will not wait for otherSaga
+  yield cancel(task)                           // Non-blocking: will resume immediately
+}
+```
+
