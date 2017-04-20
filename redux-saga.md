@@ -275,6 +275,11 @@ const fetchProducts = () => {
 
 **测试 `fetchProducts` 返回的是一个函数，`dispatch` 是什么鬼？我还得创建一个 `redux` 环境，或是 mock 一个 `dispatch`？Mock `Api.fetch`？**
 
+**actions.test.js**
+```js
+?? ??
+```
+
 <img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492710787687&di=e193065e314d819d90709705e28ed33b&imgtype=0&src=http%3A%2F%2Fatt2.citysbs.com%2Fhangzhou%2F2016%2F07%2F29%2F18%2Fmiddle_322x259-181829_v2_12691469787509821_73124c9b149f35507e5eee7217a83c2c.jpg' alt='这tm就尴尬了'>
 
 
@@ -290,7 +295,7 @@ function* fetchProducts() {
   yield put({ type: 'PRODUCTS_RECEIVED', products })
 }
 ```
-**saga.spec.js**
+**saga.test.js**
 ```js
 import { call, put } from 'redux-saga/effects'
 import Api from '...'
