@@ -133,6 +133,111 @@ function* saga() {
 
 <img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492703377980&di=bb0d9cab807bba75fb07ceaed1f3ab02&imgtype=0&src=http%3A%2F%2Fimg.itlun.cn%2Fuploads%2Fallimg%2F151226%2F1-151226144434-lp.jpg' alt='举个栗子'>
 
+## 写一个用户登陆的逻辑
+```js
+function* loginFlow() {
+  while (true) {
+    yield take('LOGIN')
+    // ... perform the login logic
+    yield take('LOGOUT')
+    // ... perform the logout logic
+  }
+}
+```
+
+## 实现
+```js
+import { take, call, put } from 'redux-saga/effects'
+import Api from '...'
+
+function* authorize(user, password) {
+  try {
+    const token = yield call(Api.authorize, user, password)
+    yield put({type: 'LOGIN_SUCCESS', token})
+    return token
+  } catch(error) {
+    yield put({type: 'LOGIN_ERROR', error})
+  }
+}
+
+function* loginFlow() {
+  while (true) {
+    const {user, password} = yield take('LOGIN_REQUEST')
+    const token = yield call(authorize, user, password)
+    if (token) {
+      yield call(Api.storeItem, {token})
+      yield take('LOGOUT')
+      yield call(Api.clearItem, 'token')
+    }
+  }
+}
+```
+
+## 一点小问题
+```js
+import { fork, call, take, put } from 'redux-saga/effects'
+import Api from '...'
+
+function* authorize(user, password) {
+  try {
+    const token = yield call(Api.authorize, user, password)
+    yield put({type: 'LOGIN_SUCCESS', token})
+    yield call(Api.storeItem, {token})
+  } catch(error) {
+    yield put({type: 'LOGIN_ERROR', error})
+  }
+}
+
+function* loginFlow() {
+  while (true) {
+    const {user, password} = yield take('LOGIN_REQUEST')
+    yield fork(authorize, user, password)
+    yield take(['LOGOUT', 'LOGIN_ERROR'])
+    yield call(Api.clearItem, 'token')
+  }
+}
+```
+
+## 事情还没完
+```js
+import { take, put, call, fork, cancel } from 'redux-saga/effects'
+
+// ...
+
+function* loginFlow() {
+  while (true) {
+    const {user, password} = yield take('LOGIN_REQUEST')
+    // fork return a Task object
+    const task = yield fork(authorize, user, password)
+    const action = yield take(['LOGOUT', 'LOGIN_ERROR'])
+    if (action.type === 'LOGOUT')
+      yield cancel(task)
+    yield call(Api.clearItem, 'token')
+  }
+}
+```
+
+## 还差最后一下下
+```js
+import { take, call, put, cancelled } from 'redux-saga/effects'
+import Api from '...'
+
+function* authorize(user, password) {
+  try {
+    const token = yield call(Api.authorize, user, password)
+    yield put({type: 'LOGIN_SUCCESS', token})
+    yield call(Api.storeItem, {token})
+    return token
+  } catch(error) {
+    yield put({type: 'LOGIN_ERROR', error})
+  } finally {
+    if (yield cancelled()) {
+      // ... put special cancellation handling code here
+    }
+  }
+}
+```
+
 
 
 
