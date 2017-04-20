@@ -7,7 +7,7 @@
 3. 它使用 ES2015 的一个新特性 **Generator**，来使得处理**副作用**的逻辑更可读，更好写，以及更容易测试。
 
 
-## 举个栗子
+## 初识 `redux-saga`
 **User.jsx**
 ```js
 class UserComponent extends React.Component {
