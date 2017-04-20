@@ -277,7 +277,7 @@ const fetchProducts = () => {
 
 **actions.test.js**
 ```js
-?? ??
+? ... ?? .... wtf !!!
 ```
 
 <img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492710787687&di=e193065e314d819d90709705e28ed33b&imgtype=0&src=http%3A%2F%2Fatt2.citysbs.com%2Fhangzhou%2F2016%2F07%2F29%2F18%2Fmiddle_322x259-181829_v2_12691469787509821_73124c9b149f35507e5eee7217a83c2c.jpg' alt='这tm就尴尬了'>
@@ -309,6 +309,12 @@ assert.deepEqual(
   put({ type: 'PRODUCTS_REQUESTED'}),
   "fetchProducts should yield an Effect put({ type: 'PRODUCTS_REQUESTED'})"
 )
+/* Put Effect
+{
+  PUT: {
+    args: [{ type: 'PRODUCTS_REQUESTED'}]
+  }
+} */
 
 // expects a call instruction
 assert.deepEqual(
@@ -316,6 +322,14 @@ assert.deepEqual(
   call(Api.fetch, '/products'),
   "fetchProducts should yield an Effect call(Api.fetch, './products')"
 )
+/* Call Effect
+{
+  CALL: {
+    fn: Api.fetch,
+    args: ['./products']
+  }
+} */
+
 
 // create a fake response
 const products = {}
