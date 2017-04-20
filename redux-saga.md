@@ -121,7 +121,7 @@ function* fetchProducts() {
 
 
 ## Task
-An task is a saga running in background. It can be created by using the `fork` function.
+A task is a saga running in background. It can be created by using the `fork` function.
 ```js
 function* saga() {
   ...
