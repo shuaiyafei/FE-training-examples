@@ -1,14 +1,14 @@
 # <a href='http://redux.js.org'><img src='https://camo.githubusercontent.com/f28b5bc7822f1b7bb28a96d8d09e7d79169248fc/687474703a2f2f692e696d6775722e636f6d2f4a65567164514d2e706e67' height='60'></a>
 
-Redux is a predictable state container（可预期的状态容器）. Managing state stuff is hard. Redux makes it simple, but not necessarily easy.
+Redux 是一个可预期的状态容器。管理应用程序的状态很难，Redux 让它变得简单，**但简单并不代表容易**
 
-## What is redux?
+## 什么是 redux?
 
-It provides predicable state management using **actions** and **reducers**.
+它使用 **actions** 和 **reducers** 提供了一套可预期的应用程序状态管理办法
 
-## What is an "action"?
+## 什么是 "action"?
 
-Describes something has(or should) happen, but they don't specify how it should be done.
+描述已经或将要发生的事，但是并不说明事情应该如何完成
 ```js
 {
   type: 'CREATE_TODO',
@@ -16,14 +16,15 @@ Describes something has(or should) happen, but they don't specify how it should 
 }
 ```
 
-## What is an "reducer"?
+## 什么是 "reducer"?
 
-A pure function that takes the previous state and an action and returns the new state
+一个“纯”函数，使用当前的 state 与 action，返回新的 state
 ```js
 (state, action) => state
 (state, action) => state + action.payload
 ```
-Reducers handle state transitions, but they must be done synchronously.
+
+Reducers 处理 state 的转变，但是转变必须是同步完成的
 
 ```js
 const counter = (state = 0, action) => {
